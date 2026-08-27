@@ -21,19 +21,30 @@ const PAGES = [
 
 function Navigation({ active, onNavigate, dark, toggleDark }) {
   const navLinks = PAGES;
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const bg = dark ? "#0B0B0C" : "#FFFFFF";
   const text = dark ? "#F4F4F5" : "#111112";
   const subText = dark ? "#A1A1AA" : "#52525B";
   const border = dark ? "#27272A" : "#E4E4E7";
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const handleNav = (path) => {
+    onNavigate(path);
+    setMenuOpen(false);
+  };
 
   return (
     <nav
       style={{
         position: "relative",
         zIndex: 10,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
         padding: "20px clamp(20px, 5vw, 64px)",
         borderBottom: `1px solid ${border}`,
         background: bg,
@@ -43,61 +54,178 @@ function Navigation({ active, onNavigate, dark, toggleDark }) {
         style={{
           display: "flex",
           alignItems: "center",
-          gap: 8,
-          fontWeight: 700,
-          fontSize: 17,
+          justifyContent: "space-between",
         }}
       >
-        <span style={{ color: "#3FB950" }}>✦</span>
-        mustafa
-      </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            fontWeight: 700,
+            fontSize: 17,
+          }}
+        >
+          <span style={{ color: "#3FB950" }}>✦</span>
+          mustafa
+        </div>
 
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "clamp(20px, 3vw, 40px)",
-        }}
-      >
-        {navLinks.map((link) => (
+        {!isMobile && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "clamp(20px, 3vw, 40px)",
+            }}
+          >
+            {navLinks.map((link) => (
+              <button
+                key={link.path}
+                onClick={() => handleNav(link.path)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                  fontSize: 15,
+                  padding: 0,
+                  color: active === link.path ? text : subText,
+                  fontWeight: active === link.path ? 600 : 500,
+                  transition: "color 200ms ease",
+                }}
+              >
+                {link.label}
+              </button>
+            ))}
+
+            <button
+              onClick={toggleDark}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                background: "none",
+                border: `1px solid ${border}`,
+                borderRadius: 999,
+                padding: "6px 14px",
+                cursor: "pointer",
+                fontFamily: "inherit",
+                fontSize: 13,
+                color: subText,
+              }}
+            >
+              {dark ? "🌙" : "☀️"} {dark ? "Night mode" : "Day mode"}
+            </button>
+          </div>
+        )}
+
+        {isMobile && (
           <button
-            key={link.path}
-            onClick={() => onNavigate(link.path)}
+            onClick={() => setMenuOpen((o) => !o)}
             style={{
               background: "none",
               border: "none",
               cursor: "pointer",
-              fontFamily: "inherit",
-              fontSize: 15,
-              padding: 0,
-              color: active === link.path ? text : subText,
-              fontWeight: active === link.path ? 600 : 500,
-              transition: "color 200ms ease",
+              padding: 4,
+              display: "flex",
+              flexDirection: "column",
+              gap: 5,
             }}
+            aria-label="Menu"
           >
-            {link.label}
+            <span
+              style={{
+                display: "block",
+                width: 24,
+                height: 2,
+                background: text,
+                borderRadius: 2,
+                transition: "transform 200ms ease",
+                transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none",
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: 24,
+                height: 2,
+                background: text,
+                borderRadius: 2,
+                transition: "opacity 200ms ease",
+                opacity: menuOpen ? 0 : 1,
+              }}
+            />
+            <span
+              style={{
+                display: "block",
+                width: 24,
+                height: 2,
+                background: text,
+                borderRadius: 2,
+                transition: "transform 200ms ease",
+                transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none",
+              }}
+            />
           </button>
-        ))}
+        )}
+      </div>
 
-        <button
-          onClick={toggleDark}
+      {isMobile && menuOpen && (
+        <div
           style={{
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            right: 0,
+            background: bg,
+            borderBottom: `1px solid ${border}`,
+            padding: "12px clamp(20px, 5vw, 64px)",
             display: "flex",
-            alignItems: "center",
-            gap: 6,
-            background: "none",
-            border: `1px solid ${border}`,
-            borderRadius: 999,
-            padding: "6px 14px",
-            cursor: "pointer",
-            fontFamily: "inherit",
-            fontSize: 13,
-            color: subText,
+            flexDirection: "column",
+            gap: 16,
+            zIndex: 20,
           }}
         >
-          {dark ? "🌙" : "☀️"} {dark ? "Night mode" : "Day mode"}
-        </button>
-      </div>
+          {navLinks.map((link) => (
+            <button
+              key={link.path}
+              onClick={() => handleNav(link.path)}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                fontFamily: "inherit",
+                fontSize: 16,
+                padding: "4px 0",
+                textAlign: "left",
+                color: active === link.path ? text : subText,
+                fontWeight: active === link.path ? 600 : 500,
+              }}
+            >
+              {link.label}
+            </button>
+          ))}
+          <button
+            onClick={toggleDark}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              background: "none",
+              border: `1px solid ${border}`,
+              borderRadius: 999,
+              padding: "8px 14px",
+              cursor: "pointer",
+              fontFamily: "inherit",
+              fontSize: 13,
+              color: subText,
+              width: "fit-content",
+            }}
+          >
+            {dark ? "🌙" : "☀️"} {dark ? "Night mode" : "Day mode"}
+          </button>
+        </div>
+      )}
     </nav>
   );
 }
