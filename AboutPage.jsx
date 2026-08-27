@@ -1,4 +1,5 @@
 import { useState } from "react";
+import photo from "./medias/f6b266eb-35ba-4797-82ce-b91b9d92d1c4.jpeg";
 
 const FOCUS_AREAS = [
   {
@@ -102,28 +103,19 @@ export default function AboutPage({ dark: darkProp, onToggleDark, onNavigate = (
           }
         `}</style>
 
-        {/* photo placeholder */}
-        <div
+        {/* photo */}
+        <img
+          src={photo}
+          alt="Mustafa Şenoğlu"
           style={{
-            border: `1.5px dashed ${ghostBorder}`,
             borderRadius: 20,
-            background: cardBg,
             width: "min(220px, 60%)",
             aspectRatio: "1 / 1",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            gap: 8,
+            objectFit: "cover",
             position: "sticky",
             top: 32,
           }}
-        >
-          <span style={{ fontSize: 26, opacity: 0.35 }}>📷</span>
-          <span style={{ fontSize: 11.5, color: subText, opacity: 0.75 }}>
-            photo soon
-          </span>
-        </div>
+        />
 
         <div>
           <h2

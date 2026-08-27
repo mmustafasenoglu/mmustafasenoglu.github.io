@@ -1,4 +1,5 @@
 import { useState } from "react";
+import photo from "./medias/f6b266eb-35ba-4797-82ce-b91b9d92d1c4.jpeg";
 
 const PLACEHOLDER_PROJECTS = [{ slot: "01" }, { slot: "02" }, { slot: "03" }];
 
@@ -78,27 +79,18 @@ export default function HomePage({ dark, onToggleDark, onNavigate = () => {} }) 
           padding: "clamp(48px, 8vw, 96px) clamp(20px, 5vw, 64px) 120px",
         }}
       >
-        {/* photo placeholder */}
+        {/* photo */}
         <div style={{ position: "relative", width: 168, marginBottom: 36 }}>
-          <div
+          <img
+            src={photo}
+            alt="Mustafa Şenoğlu"
             style={{
               width: 168,
               height: 168,
               borderRadius: 20,
-              border: `1.5px dashed ${ghostPillBorder}`,
-              background: dark ? "#18181B" : "#FAFAFA",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
-              gap: 4,
+              objectFit: "cover",
             }}
-          >
-            <span style={{ fontSize: 22, opacity: 0.35 }}>📷</span>
-            <span style={{ fontSize: 11, color: subText, opacity: 0.7 }}>
-              photo soon
-            </span>
-          </div>
+          />
           <div
             style={{
               position: "absolute",
