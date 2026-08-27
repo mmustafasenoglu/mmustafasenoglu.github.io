@@ -20,7 +20,7 @@ const PAGES = [
 ];
 
 function Navigation({ active, onNavigate, dark, toggleDark }) {
-  const navLinks = PAGES.filter((p) => p.path !== "/");
+  const navLinks = PAGES;
   const bg = dark ? "#0B0B0C" : "#FFFFFF";
   const text = dark ? "#F4F4F5" : "#111112";
   const subText = dark ? "#A1A1AA" : "#52525B";
@@ -104,7 +104,7 @@ function Navigation({ active, onNavigate, dark, toggleDark }) {
 
 function MainLayout({ children, dark, toggleDark, onNavigate }) {
   const location = useLocation();
-  const active = location.pathname === "/" ? "/home" : location.pathname;
+  const active = location.pathname;
 
   return (
     <div
