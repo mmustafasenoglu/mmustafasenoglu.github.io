@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import photo from "./medias/f6b266eb-35ba-4797-82ce-b91b9d92d1c4.jpeg";
 
 const FOCUS_AREAS = [
@@ -52,6 +53,11 @@ export default function AboutPage({ dark: darkProp, onToggleDark, onNavigate = (
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
       `}</style>
+
+      <Helmet>
+        <title>Hakkımda — Mustafa Şenoğlu | Software Engineer</title>
+        <meta name="description" content="Mustafa Şenoğlu hakkında — Backend Systems ve AI Infrastructure konularında uzman yazılım mühendisi. CS öğrencisi, Microsoft stajyeri ve açık kaynak katkıcısı." />
+      </Helmet>
 
       {/* page header */}
       <div

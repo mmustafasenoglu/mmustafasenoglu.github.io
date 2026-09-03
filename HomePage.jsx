@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import photo from "./medias/f6b266eb-35ba-4797-82ce-b91b9d92d1c4.jpeg";
 
 const PLACEHOLDER_PROJECTS = [{ slot: "01" }, { slot: "02" }, { slot: "03" }];
@@ -30,6 +31,11 @@ export default function HomePage({ dark, onToggleDark, onNavigate = () => {} }) 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
       `}</style>
+
+      <Helmet>
+        <title>Mustafa Şenoğlu | Software Engineer — Backend Systems & AI Infrastructure</title>
+        <meta name="description" content="Mustafa Şenoğlu (Mustafa Senoglu) — Software Engineer specialized in Backend Systems, AI Infrastructure and Open Source. CS student building production backends and AI infrastructure at Microsoft. 202 PRs opened, 35 merged." />
+      </Helmet>
 
       {/* faint grid background, top-left, fading out */}
       <div

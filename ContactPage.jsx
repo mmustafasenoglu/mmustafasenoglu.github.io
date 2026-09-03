@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const EMAIL = "mmustafasenoglu0@gmail.com";
 const GITHUB_URL = "https://github.com/mmustafasenoglu";
@@ -54,6 +55,11 @@ export default function ContactPage({ dark: darkProp, onToggleDark }) {
         .term-input::placeholder { color: #4F6B5C; }
         .term-input:focus { outline: none; }
       `}</style>
+
+      <Helmet>
+        <title>İletişim — Mustafa Şenoğlu | Software Engineer</title>
+        <meta name="description" content="Mustafa Şenoğlu ile iletişime geçin — mmustafasenoglu0@gmail.com | GitHub: github.com/mmustafasenoglu | LinkedIn: linkedin.com/in/mustafasenoglu" />
+      </Helmet>
 
       <div style={{ display: "flex", justifyContent: "flex-end", padding: "24px clamp(20px, 5vw, 64px) 0" }}>
         <button

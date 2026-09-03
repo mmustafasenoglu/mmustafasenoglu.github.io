@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const LEVELS = {
   proficient: { label: "Proficient", color: "#3FB950" },
@@ -122,6 +123,11 @@ export default function SkillsPage({ dark: darkProp, onToggleDark }) {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
       `}</style>
+
+      <Helmet>
+        <title>Yetenekler — Mustafa Şenoğlu | Software Engineer</title>
+        <meta name="description" content="Mustafa Şenoğlu'nun teknik yetenekleri — Python, FastAPI, Django, PyTorch, Kubernetes, Docker, Kafka, Triton, DeepSpeed ve daha fazlası." />
+      </Helmet>
 
       <div style={{ display: "flex", justifyContent: "flex-end", padding: "24px clamp(20px, 5vw, 64px) 0" }}>
         <button

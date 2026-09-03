@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const EXPERIENCES = [
   {
@@ -115,6 +116,11 @@ export default function ExperiencePage({ dark: darkProp, onToggleDark }) {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
       `}</style>
+
+      <Helmet>
+        <title>Deneyim — Mustafa Şenoğlu | Software Engineer</title>
+        <meta name="description" content="Mustafa Şenoğlu'nun iş deneyimi — Microsoft staj, freelance projeler ve açık kaynak katkıları. Backend Systems, AI Infrastructure ve yazılım geliştirme." />
+      </Helmet>
 
       {/* dark mode toggle */}
       <div style={{ display: "flex", justifyContent: "flex-end", padding: "24px clamp(20px, 5vw, 64px) 0" }}>

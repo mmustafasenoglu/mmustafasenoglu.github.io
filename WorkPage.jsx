@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const CATEGORIES = ["All Projects", "Full-Stack / Web", "AI & Data"];
 
@@ -86,6 +87,11 @@ export default function WorkPage({ dark: darkProp, onToggleDark }) {
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         .proj-track::-webkit-scrollbar { display: none; }
       `}</style>
+
+      <Helmet>
+        <title>Projeler — Mustafa Şenoğlu | Software Engineer</title>
+        <meta name="description" content="Mustafa Şenoğlu'nun projeleri — Full-stack web uygulamaları, AI ve veri projeleri. Backend ve AI Infrastructure alanında üretim seviyesi yazılımlar." />
+      </Helmet>
 
       <div style={{ display: "flex", justifyContent: "flex-end", padding: "24px clamp(20px, 5vw, 64px) 0" }}>
         <button

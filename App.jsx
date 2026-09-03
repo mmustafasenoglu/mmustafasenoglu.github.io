@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { HashRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 import IntroScreen from "./IntroScreen";
 import HomePage from "./HomePage";
@@ -389,8 +390,10 @@ function AppInner() {
 
 export default function App() {
   return (
-    <HashRouter>
-      <AppInner />
-    </HashRouter>
+    <HelmetProvider>
+      <HashRouter>
+        <AppInner />
+      </HashRouter>
+    </HelmetProvider>
   );
 }
