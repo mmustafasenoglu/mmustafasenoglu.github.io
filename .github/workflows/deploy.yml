@@ -37,3 +37,31 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  ping:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Ping Bing Sitemap
+        run: |
+          curl -s "https://www.bing.com/ping?sitemap=https://mmustafasenoglu.github.io/sitemap.xml" \
+            -o /dev/null -w "Bing ping status: %{http_code}\n"
+
+      - name: Ping IndexNow (Bing, Yandex, Naver, Seznam)
+        run: |
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "host": "mmustafasenoglu.github.io",
+              "key": "afaf1d36e0df44a29334d8c24510f915",
+              "keyLocation": "https://mmustafasenoglu.github.io/afaf1d36e0df44a29334d8c24510f915.txt",
+              "urlList": [
+                "https://mmustafasenoglu.github.io/",
+                "https://mmustafasenoglu.github.io/#/about",
+                "https://mmustafasenoglu.github.io/#/experience",
+                "https://mmustafasenoglu.github.io/#/work",
+                "https://mmustafasenoglu.github.io/#/skills",
+                "https://mmustafasenoglu.github.io/#/contact"
+              ]
+            }' \
+            -o /dev/null -w "IndexNow ping status: %{http_code}\n"
